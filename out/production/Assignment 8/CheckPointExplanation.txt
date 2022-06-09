@@ -1,0 +1,9 @@
+so far, we have created our basic classes that read through the movies and users and puts their information in separate
+classes as stated on the handout. We then started using each other's classes to fulfill our parts by making arguments to functions
+instances of each other's classes. For me (Alex), I used their MovieBaseTL Class to get the user genre averages and also
+to get the user genre preferences. While I (Tyler), utilized the UserDataAC class to add average ratings for movies.
+
+For the rest of the project, we still need to complete number 7. For 7 it would seem best to use a set to recommend movies
+so we do not get repeated movies since movies can have multiple genres. We can then continue to add movies until the list
+reaches our destined amount of either 10, 30, or 50 depending on our choice. I (Tyler) might also have to figure out
+how to get the AVL in order iteration functioning. Right now I currently have BALBOA running for the movie list

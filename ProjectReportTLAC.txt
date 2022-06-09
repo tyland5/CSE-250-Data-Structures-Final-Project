@@ -1,0 +1,63 @@
+Question 1
+
+Tyler:
+One data structure that took a lot of consideration was my movieRankPerGenre variable. This data structure
+basically has all of the movies that belong to each genre, ranked according to its movie rating. The purpose of this
+variable is for the movie recommendation function in the userData class. We thought it would be necessary, so I created it.
+As is, it is basically a Map of movie genres to their corresponding BALOBADLLs, where the BALBOADLL is all of the movies
+sorted according to rank. At first, I thought about making each key in the map point to a heap since insertions are a promised
+O(log n) and entries are sorted top down. However, I remembered that it is not sorted in the way that we want for the project
+to maximize the rm ×pu,g equation mentioned in the handout. Thus I made it point to a BALBOA. Of course I thought about
+utilizing the BSTAVL data structure as that promises O(log n) and could meet the sortedness we would want, but I could not
+make an inorder traversal mechanism. Well I could, but I had time obligations in my 5 other classes so I had to be boring
+and keep the BALBOADDLL. Of course, the biggest factor to all of these data structures created by Professor Regan
+compared to any other ones is the ISR or iterator implementations where we can save our spot in the traversal, which proves
+extremely useful in how the movie recommendation function was implemented
+
+Another big choice I made is for the MovieBase class constructor. I included a parameter for the file name and
+number of movies for a user utilizing the class to insert. This goes hand in hand with the createMovieDataBase function
+that I implemented. We of course would want to account for where a user would want to extract information from for the
+movie base. Of course, this file would have to be formatted correctly for the function to operate as intended.
+It is also worth mentioning that at some point I thought about making the createMovieDataBase a private function. I was
+thinking about making it so when you instantiate the class, it would automatically call the function so the user won't have to.
+However, I thought it would be more logical for the user to call it so they know for sure that a movie data base has been
+actually created.
+
+Alexis:
+For the user base classes, it was decided that using a class object for the user and their ratings were best for ease of use
+for myself and my team member. Within the class object, I think it was the most efficient choice to give two fields: the user ID,
+and a map of the movie ID and its related rating. This allowed for very easy access of user’s movie ratings and for later use in
+determining the genre preferences of a user. An alternate method of doing this was to store each user and the movie ratings in a
+Map that would have the user ID mapped to an array of the Movie ID and its rating. So the Array would contain two pieces of data:
+index 0 held the Movie ID, and index 1 held the Movie rating. This was decided against because it may cause confusion when trying
+to access data. So using a class just made accessing data much simpler and efficient.
+
+Now, for the user’s genre preferences, I decided to make two separate classes to give better access to each information. The
+first class held the user’s genre rating, and the second held the preference for each genre in comparison to the movie’s ratings.
+During the process of inputting the data into the classes, each one would inaccurate data until the end where calculations were
+done. This was the first consideration I had since it would follow the pattern of the previous class of user ID and Movie ratings.
+I believe as stated in the first part, using a Map that mapped a user ID to an Array with index 0 being the genre and index 1
+being the rating or preference, depending on the function we are looking at. Or instead of an Array, we could use another Map,
+mapping the genre to the rating. Using the classes was just much simpler and efficient for going through data and for my other
+team member to use and understand.
+
+
+Question 2
+
+If we were to go through the main file's algorithm, then this is how it would go. Creating the movie database itself would
+take O(M). There is no way around this as of course, you obviously want to add all movies. Insertions are O(1) since we
+are utilizing an array. Creating the user database would also be linear, taking time O(U) because you want to add all users
+and its O(1) for inserting into an array. The next function in line is assigning the movie ratings. This at worst can take
+O(M*U) time. This is because there is a possibility that a user could watch every movie in the movie database and rate them,
+this is obviously an extremely unlikely case but must be considered. Since we want an accurate movie rating system, we need
+to iterate through every user and their respective movie ratings. In this function, we would also sort the movies in their
+respective genres according to their rankings. This part of the function takes O(M*√M) time since it iterates through every movie
+then inserts into the BALBOADLL which takes optimally O(√n) or in this case O(√M) time. This function altogether takes
+O(M*U + M*√M). After assigning the movie ratings, we would then calculate the users genre preferences. This overall takes
+O(U*M) time. The function looks through all of the users' ratings and finds the ratio between the users' ratings of movies
+and the movie database's rating for those movies. Using the logic from the prior function, all users could possibly
+rate every movie. Lastly, we would recommend movies to a user. This is completely dependent on the number of recommendations
+we want to give because it gives recommendations to just one select user (which is why we do a for loop in main to recommend
+to all users). We'll label this variable R, so it would take O(R) time as insertions into a set should be O(1) since it
+utilizes hash. Looking at the entire algorithm collectively, it would take it O(M + U + M*U + (M*U + M*√M) + U*M + R)
+time. If we want to simplify it to the highest order, then it would take O(3MU) or O(M*U) time which we feel is necessary.
